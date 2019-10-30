@@ -124,8 +124,11 @@ int main()
             case INFO:{
                 printf("Any additional info?\n>");
                 gets(addInfo);
+                state++;
+                break;
             }
             case ORDER:{
+                TotalPrice=0;
                 printf("This is your order:\n");
                 printf("------------\n");
                 printf("Name: %s\n",username);
@@ -141,7 +144,7 @@ int main()
                 else printf("no\n");
                 printf("Additional info: %s\n",addInfo);
                 printf("Payment amount: %d\n",TotalPrice);
-                printf("-----------\n");
+                printf("------------\n");
                 printf("a) Confirm order\n");
                 printf("b) Go back\n");
                 printf(">");
@@ -151,7 +154,7 @@ int main()
                     printf("You order has been registered. Thank you for buying from us, %s!\n",username);
                     confirm=true;
                 }
-                if(choice=='b') {state--;break;}
+                if(choice=='b') {state-=2;break;} //it brings us back to the cutlary option
                 getchar();
             }
             default:break;
