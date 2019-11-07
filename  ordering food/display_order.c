@@ -44,3 +44,10 @@ void calculateTotalAmount(int foodPrice, int drinkPrice, int drinkChoice) {
     printf("Payment amount: %d\n", totalPrice);
     printf("------------\n");
 }
+void displayOrder(char username[], char food[MAX_FOOD_NAME], int foodPrice, char drink[MAX_DRINK_NAME], int drinkPrice, int drinkChoice,int getCutlery, char addInfo[]) {
+    displayOrderCustomerData(username);
+    displayOrderFood(food, foodPrice);
+    displayOrderDrink(drink, drinkPrice, drinkChoice);
+    displayOrderAdditionalItems(getCutlery, addInfo);
+    calculateTotalAmount(foodPrice, drinkPrice, drinkChoice);
+}

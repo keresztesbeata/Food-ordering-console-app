@@ -14,5 +14,5 @@ void displayOrderDrink(char drink[MAX_DRINK_NAME], int drinkPrice, int drinkChoi
 void displayOrderAdditionalItems(int getCutlery, char addInfo[]);
 void displayOrderConfirm();
 void calculateTotalAmount(int foodPrice, int drinkPrice, int drinkChoice);
-
+void displayOrder(char username[], char food[MAX_FOOD_NAME], int foodPrice, char drink[MAX_DRINK_NAME], int drinkPrice, int drinkChoice,int getCutlery, char addInfo[]);
 #endif //_ORDERING_FOOD_DISPLAY_ORDER_H

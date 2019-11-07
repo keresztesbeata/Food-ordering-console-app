@@ -3,36 +3,24 @@
 #include "input_from_customer.h"
 #include "display_menu.h"
 #include "display_order.h"
-
-// states of the order
-#define LOGIN 0
-#define FOOD (LOGIN+1)
-#define FOOD_TYPE (FOOD+1)
-#define DRINK (FOOD_TYPE+1)
-#define CUTLERY (DRINK+1)
-#define INFO (CUTLERY+1)
-#define ORDER (INFO+1)
 // maximum memory
 #define MAX_FOOD_NAME 30
 #define MAX_FOOD_TYPE_NAME 30
 #define MAX_DRINK_NAME 20
-
+enum statesOfOrder {LOGIN, FOOD, FOOD_TYPE, DRINK, CUTLERY, INFO, ORDER}; // states of the order
 int main() {
     //food data
     int nrFood=3;
     char food[][MAX_FOOD_NAME]={"Pizza","Pasta","Salad"};
-    int nrType[]={3,2,4};
+    int nrType[]={3,2,4}, foodPrices[3][4]={{21,23,19},{23,21},{23,22,19,21}};
     char foodType[3][4][MAX_FOOD_TYPE_NAME]={{"Pizza Carbonara","Pizza Margherita","Pizza Diavola"},
                                              {"Chicken Alfredo","Mac&Cheese"},
                                              {"Tuna Salad","Chicken Salad","Greek Salad","Cobb"}};
-    int foodPrices[3][4]={{21,23,19},{23,21},{23,22,19,21}};
-    int nrDrinks=4;
+    int nrDrinks=4, drinkPrices[4]={5,5,5,4};
     char drink[][MAX_DRINK_NAME]={"Cola","Fanta","Lipton","Water"};
-    int drinkPrices[4]={5,5,5,4};
     //user input data
-    char username[30], password[30];
+    char username[30], password[30], addInfo[100];
     int foodChoice, typeChoice, drinkChoice, getCutlery;
-    char addInfo[100];
     //loop
     int state=LOGIN;
     bool confirm=false;
@@ -67,11 +55,7 @@ int main() {
                 break;
             }
             case ORDER:{
-                    displayOrderCustomerData(username);
-                    displayOrderFood(foodType[foodChoice][typeChoice], foodPrices[foodChoice][typeChoice]);
-                    displayOrderDrink(drink[drinkChoice], drinkPrices[drinkChoice], drinkChoice);
-                    displayOrderAdditionalItems(getCutlery, addInfo);
-                    calculateTotalAmount(foodPrices[foodChoice][typeChoice], drinkPrices[drinkChoice], drinkChoice);
+                    displayOrder(username, foodType[foodChoice][typeChoice], foodPrices[foodChoice][typeChoice], drink[drinkChoice], drinkPrices[drinkChoice], drinkChoice, getCutlery, addInfo);
                     placeOrder(&confirm, username, &state);
             }
             default:break;
