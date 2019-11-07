@@ -5,7 +5,7 @@
 #include "display_menu.h"
 #include<stdio.h>
 
-void displayFood(int nrFood,char food[][MAX_FOOD_NAME]) {
+void displayFood(int nrFood, char food[][MAX_FOOD_NAME]) {
     printf("Please choose the kind of food you'd like to eat today!\n");
     for (int i = 0; i < nrFood; i++) {
         putchar('a' + i);
@@ -17,7 +17,7 @@ void displayFood(int nrFood,char food[][MAX_FOOD_NAME]) {
 }
 
 
-void displayFoodTypes(char foods[MAX_FOOD_NAME],int nrType, char type[][MAX_FOOD_TYPE_NAME],int prices[]) {
+void displayFoodTypes(char foods[MAX_FOOD_NAME], int nrType, char type[][MAX_FOOD_TYPE_NAME], int prices[]) {
     printf("Please choose the type of %s!\n", foods);
     for (int i = 0; i < nrType; i++) {
         putchar('a' + i);
@@ -28,13 +28,12 @@ void displayFoodTypes(char foods[MAX_FOOD_NAME],int nrType, char type[][MAX_FOOD
     printf(">");
 }
 
-void displayDrinks(char foods[MAX_FOOD_TYPE_NAME],int nrDrinks,char drink[][MAX_DRINK_NAME],int drinkPrices[])
-{
+void displayDrinks(char foods[MAX_FOOD_TYPE_NAME], int nrDrinks, char drink[][MAX_DRINK_NAME], int drinkPrices[]) {
     printf("Please choose a drink to go with your %s.\n",foods);
     for(int i=0;i<nrDrinks;i++)
     {
         putchar('a'+i);
-        printf(") %s: %d\n",drink[i],drinkPrices[i]);
+        printf(") %s: %d\n", drink[i], drinkPrices[i]);
     }
     putchar('a'+nrDrinks);
     printf(") No, thanks!\n");
@@ -42,4 +41,11 @@ void displayDrinks(char foods[MAX_FOOD_TYPE_NAME],int nrDrinks,char drink[][MAX_
     printf(") Go back\n");
     printf(">");
 
+}
+void displayCutlery() {
+    printf("Do you want cutlery?\n");
+    printf("a) Yes\n");
+    printf("b) No, thanks\n");
+    printf("c) Go back\n");
+    printf(">");
 }

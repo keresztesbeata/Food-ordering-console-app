@@ -9,8 +9,10 @@
 #define MAX_DRINK_NAME 20
 
 void displayOrderCustomerData(char username[]);
-void displayOrderFood(char food[MAX_FOOD_NAME],int foodPrice,int *totalPrice);
-void displayOrderDrink(char drink[MAX_DRINK_NAME],int drinkPrice,int drinkChoice,int*totalPrice);
-void displayOrderAdditionalItems(int getCutlery, char addInfo[],int*totalPrice);
+void displayOrderFood(char food[MAX_FOOD_NAME], int foodPrice);
+void displayOrderDrink(char drink[MAX_DRINK_NAME], int drinkPrice, int drinkChoice);
+void displayOrderAdditionalItems(int getCutlery, char addInfo[]);
+void displayOrderConfirm();
+void calculateTotalAmount(int foodPrice, int drinkPrice, int drinkChoice);
 
 #endif //_ORDERING_FOOD_DISPLAY_ORDER_H

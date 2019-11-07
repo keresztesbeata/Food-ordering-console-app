@@ -6,8 +6,9 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include "display_order.h"
 
-void login(char username[], char password[],int *state) {
+void login(char username[], char password[], int *state) {
     printf("Welcome to Noblesse!\n");
     printf("Please sign in to continue!\n");
     printf("->Username:\n>");
@@ -17,7 +18,7 @@ void login(char username[], char password[],int *state) {
     (*state)++;
 }
 
-int getChoiceIndex(int nrChoices,int*state) {
+int getChoiceIndex(int nrChoices, int *state) {
     int customerChoice;
     char choice=getchar();
     getchar();
@@ -30,15 +31,14 @@ int getChoiceIndex(int nrChoices,int*state) {
     return customerChoice;
 }
 
-int getOptionalChoiceIndex(int nrChoices,int*state)
-{
+int getOptionalChoiceIndex(int nrChoices, int *state) {
     int chosenElement;
     int choice=getchar();
     getchar();
     if(choice=='a'+nrChoices+1)
         (*state)--;
     else {
-        if (choice == 'a' + nrChoices)
+        if (choice =='a'+nrChoices)
             chosenElement=-1;  //if the customer chose nothing the function returns negative value
         else
             chosenElement=choice - 'a';
@@ -47,13 +47,8 @@ int getOptionalChoiceIndex(int nrChoices,int*state)
     return chosenElement;
 }
 
-int chooseCutlery (int* state) {
+int chooseCutlery (int *state) {
     int wantCutlery;
-    printf("Do you want cutlery?\n");
-    printf("a) Yes\n");
-    printf("b) No, thanks\n");
-    printf("c) Go back\n");
-    printf(">");
     int choice=getchar();
     getchar();
     if(choice=='c') {
@@ -68,24 +63,22 @@ int chooseCutlery (int* state) {
     return wantCutlery;
 }
 
-void getAdditionalInfo(char addInfo[],int *state) {
+void getAdditionalInfo(char addInfo[], int *state) {
     printf("Any additional info?\n>");
     gets(addInfo);
     (*state)++;
 }
 
-void placeOrder(bool*confirm,int*state,char username[]) {
-    printf("a) Confirm order\n");
-    printf("b) Go back\n");
-    printf(">");
+void placeOrder(bool *confirm, char username[], int *state) {
+    displayOrderConfirm();
     int choice=getchar();
     getchar();
     if(choice=='a') {
-        printf("You order has been registered. Thank you for buying from us, %s!\n",username);
+        printf("You order has been registered. Thank you for buying from us, %s!\n", username);
         *confirm=true;
     }
     else {
-        if (choice == 'b')
+        if (choice=='b')
             (*state)-=2;     //it brings us back to the cutlery option
         else
             getchar();
