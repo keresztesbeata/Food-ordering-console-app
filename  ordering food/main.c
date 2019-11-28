@@ -42,7 +42,7 @@ int main() {
             }
             case DRINK:{
                 displayDrinks(food[foodChoice], nrDrinks, drink, drinkPrices);
-                drinkChoice=getOptionalChoiceIndex(nrDrinks, &state);
+                drinkChoice=getOptionalChoiceIndex(nrDrinks, &state);// return null value for no drink
                 break;
             }
             case CUTLERY:{
