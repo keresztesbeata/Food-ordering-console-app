@@ -15,13 +15,13 @@ void displayOrderCustomerData(char username[]) {
     printf("------------\n");
     printf("Name: %s\n", username);
 }
-void displayOrderFood(char food[MAX_FOOD_NAME], int foodPrice) {
+void displayOrderFood(char *foods, double foodPrices) {
     printf("Food items:\n");
-    printf("---%s: %d\n", food, foodPrice);
+    printf("---%s: %.2lf\n", foods, foodPrices);
 }
-void displayOrderDrink(char drink[MAX_DRINK_NAME], int drinkPrice, int drinkChoice) {
+void displayOrderDrink(char *drinks, double drinkPrices, int drinkChoice) {
     if (drinkChoice>=0) {
-        printf("---%s: %d\n", drink, drinkPrice);
+        printf("---%s: %.2lf\n", drinks, drinkPrices);
     }
 }
 void displayOrderAdditionalItems(int getCutlery, char addInfo[]) {
@@ -36,18 +36,18 @@ void displayOrderConfirm() {
     printf("b) Go back\n");
     printf(">");
 }
-void calculateTotalAmount(int foodPrice, int drinkPrice, int drinkChoice) {
-    int totalPrice=0;
-    totalPrice+=foodPrice;
+void calculateTotalAmount(double foodPrices, double drinkPrices, int drinkChoice) {
+    double totalPrice=0;
+    totalPrice+=foodPrices;
     if(drinkChoice>=0)
-        totalPrice+=drinkPrice;
-    printf("Payment amount: %d\n", totalPrice);
+        totalPrice+=drinkPrices;
+    printf("Payment amount: %.2lf\n", totalPrice);
     printf("------------\n");
 }
-void displayOrder(char username[], char food[MAX_FOOD_NAME], int foodPrice, char drink[MAX_DRINK_NAME], int drinkPrice, int drinkChoice,int getCutlery, char addInfo[]) {
+void displayOrder(char username[], char *foods, double foodPrices, char *drinks, double drinkPrices, int drinkChoice,int getCutlery, char addInfo[]) {
     displayOrderCustomerData(username);
-    displayOrderFood(food, foodPrice);
-    displayOrderDrink(drink, drinkPrice, drinkChoice);
+    displayOrderFood(foods, foodPrices);
+    displayOrderDrink(drinks, drinkPrices, drinkChoice);
     displayOrderAdditionalItems(getCutlery, addInfo);
-    calculateTotalAmount(foodPrice, drinkPrice, drinkChoice);
+    calculateTotalAmount(foodPrices, drinkPrices, drinkChoice);
 }
