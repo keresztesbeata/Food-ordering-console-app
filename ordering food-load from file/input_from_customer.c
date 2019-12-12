@@ -3,13 +3,14 @@
 //
 
 #include "input_from_customer.h"
+#include "display_order.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include<string.h>
-#include "display_order.h"
-#define MAX_NAME_LENGHT 20
-#define MAX_PASSWD_LENGHT 20
+
+#define MAX_USERNAME 30
+#define MAX_PASSWORD 30
 
 void displaySignOptions () {
     printf("Welcome to Food Thingies!\n");
@@ -22,10 +23,9 @@ void signUp(FILE *loginFile, char username[], char password[], int *state, int *
     //open file for reading+modifying
     loginFile=fopen("accounts.txt","r+");
     if(loginFile==NULL) {
-        printf("file could not be opened\n");
+        perror("File could not be open");
         exit(-1);
     }
-    else printf("file opened successfully\n");
     int key;
     //read key
     fscanf(loginFile,"%d",&key);
@@ -38,7 +38,7 @@ void signUp(FILE *loginFile, char username[], char password[], int *state, int *
     printf("%s\n",SIGNING_UP);
     printf("---Username:\n>");
     gets(username);
-    char matchingPassword[MAX_PASSWD_LENGHT];
+    char matchingPassword[MAX_PASSWORD];
     int conditionUsername=validateUsername(loginFile, noOfUsers, username, matchingPassword);
     //decrypt password
     decrypt_pass(key,matchingPassword);
@@ -69,7 +69,7 @@ void signIn(FILE *loginFile, char username[], char password[], int *state, int *
     //open file for reading
     loginFile=fopen("accounts.txt","r");
     if(loginFile==NULL) {
-        printf("file could not be opened\n");
+        perror("File could not be open");
         exit(-1);
     }
     int key;
@@ -80,7 +80,7 @@ void signIn(FILE *loginFile, char username[], char password[], int *state, int *
     printf("%s\n", SIGNING_IN);
     printf("---Username:\n>");
     gets(username);
-    char matchingPassword[MAX_PASSWD_LENGHT];
+    char matchingPassword[MAX_PASSWORD];
     int conditionUsername = validateUsername(loginFile, noOfUsers, username,matchingPassword);
     //decrypt password
     decrypt_pass(key,matchingPassword);
@@ -112,14 +112,12 @@ void login(char username[], char password[], int *state) {
             int goOn = 1;
             while (goOn)
                 signIn(loginFile,username, password, state, &goOn);
-            printf("sign in successful\n");
             break;
         }
         case 'b':{
             int goOn = 1;
             while (goOn)
                 signUp(loginFile,username, password, state, &goOn);
-            printf("sign up successful\n");
             break;
         }
         default: break;
@@ -142,7 +140,7 @@ void encrypt_pass(int key, char password[]) {
     }
 }
 int validateUsername(FILE *loginFile, int noOfUsers, char username[], char matchingPassword[]) {
-    char oldUsername[MAX_NAME_LENGHT],oldPassword[MAX_PASSWD_LENGHT];
+    char oldUsername[MAX_USERNAME],oldPassword[MAX_PASSWORD];
     for(int i=0;i<noOfUsers;i++) {
         fscanf(loginFile,"%s %s",oldUsername,oldPassword);//read username from file
         //identify username
