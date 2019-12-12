@@ -17,15 +17,20 @@
 #define USER_NOT_FOUND "Username doesn't exist"
 #define DUPLICATE_USER "Please choose another username!"
 #define INCORRECT_PASSWORD "Incorrect password"
+#define MAX_NAME_LENGHT 20
+#define MAX_PASSWD_LENGHT 20
 #include <stdbool.h>
+#include<stdio.h>
 
 //login
 void login(char username[], char password[], int *state);
-void signIn(char username[], char password[], int *state, int *goOn );
-void signUp(char username[], char password[], int *state, int *goOn );
+void signIn(FILE *loginFile, char username[], char password[], int *state, int *goOn );
+void signUp(FILE *loginFile, char username[], char password[], int *state, int *goOn );
 //validate username and password
-int validateUsername(char username[]);
-int validatePassword(char password[], char username[]);
+void decrypt_pass(int key, char password[]);
+void encrypt_pass(int key, char password[]);
+int validateUsername(FILE *loginFile, int noOfUsers, char username[], char matchingPassword[]);
+int validatePassword(char password[], char matchingPassword[], char username[]);
 int isLongEnough(char password[]);
 int notContainUsername(char password[],char username[]);
 int containSpecialCharacters(char password[]);
