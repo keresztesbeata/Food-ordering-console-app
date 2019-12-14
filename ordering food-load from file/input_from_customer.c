@@ -9,6 +9,8 @@
 #include <stdbool.h>
 #include<string.h>
 
+#define FILE_PATH "../accounts.txt"
+
 #define MAX_USERNAME 30
 #define MAX_PASSWORD 30
 
@@ -21,7 +23,7 @@ void displaySignOptions () {
 
 void signUp(FILE *loginFile, char username[], char password[], int *state, int *goOn ) {
     //open file for reading+modifying
-    loginFile=fopen("accounts.txt","r+");
+    loginFile=fopen(FILE_PATH,"r+");
     if(loginFile==NULL) {
         perror("File could not be open");
         exit(-1);
@@ -67,7 +69,7 @@ void signUp(FILE *loginFile, char username[], char password[], int *state, int *
 }
 void signIn(FILE *loginFile, char username[], char password[], int *state, int *goOn ) {
     //open file for reading
-    loginFile=fopen("accounts.txt","r");
+    loginFile=fopen(FILE_PATH,"r");
     if(loginFile==NULL) {
         perror("File could not be open");
         exit(-1);

@@ -10,6 +10,7 @@
 #define MAX_PASSWORD 30
 #define MAX_ADDITIONAL_INFO 20
 #define LOAD_DATA "Please load the data"
+#define FILE_PATH "../data.txt"
 
 enum statesOfOrder {LOADING_DATA,LOGIN, FOOD, FOOD_TYPE, DRINK, CUTLERY, INFO, ORDER}; // states of the order
 int main() {
@@ -27,7 +28,7 @@ int main() {
         switch (state) {
             case LOADING_DATA: {
                 //open file
-                dataFile = fopen("data.txt", "r");
+                dataFile = fopen(FILE_PATH, "r");
                 //check if file was opened successfully
                 if (dataFile == NULL) {
                     printf("%s\n", LOAD_DATA);
