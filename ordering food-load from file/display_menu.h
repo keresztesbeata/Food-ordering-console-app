@@ -12,7 +12,8 @@
 #define MAX_DRINK_NAME 20
 
 void displayFood(int noFoods, char **foods);
-void displayFoodTypes(char *foods, int noTypes, char **foodTypes, double *foodPrices);
+void displayFoodTypes(char *foods, int noTypes, char **types, double *prices);
 void displayDrinks(char *foods, int noDrinks, char **drinks, double *drinkPrices);
 void displayCutlery();
+
 #endif //_ORDERING_FOOD_DISPLAY_MENU_H

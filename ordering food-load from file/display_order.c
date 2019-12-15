@@ -15,13 +15,13 @@ void displayOrderCustomerData(char username[]) {
     printf("------------\n");
     printf("Name: %s\n", username);
 }
-void displayOrderFood(char *foods, double foodPrices) {
+void displayOrderFood(char *food, double foodPrice) {
     printf("Food items:\n");
-    printf("---%s: %.2lf\n", foods, foodPrices);
+    printf("---%s: %.2lf\n", food, foodPrice);
 }
-void displayOrderDrink(char *drinks, double drinkPrices, int drinkChoice) {
+void displayOrderDrink(char *drink, double drinkPrice, int drinkChoice) {
     if (drinkChoice>=0) {
-        printf("---%s: %.2lf\n", drinks, drinkPrices);
+        printf("---%s: %.2lf\n", drink, drinkPrice);
     }
 }
 void displayOrderAdditionalItems(int getCutlery, char addInfo[]) {
@@ -36,11 +36,11 @@ void displayOrderConfirm() {
     printf("b) Go back\n");
     printf(">");
 }
-void calculateTotalAmount(double foodPrices, double drinkPrices, int drinkChoice) {
+void calculateTotalAmount(double foodPrice, double drinkPrice, int drinkChoice) {
     double totalPrice=0;
-    totalPrice+=foodPrices;
+    totalPrice+=foodPrice;
     if(drinkChoice>=0)
-        totalPrice+=drinkPrices;
+        totalPrice+=drinkPrice;
     printf("Payment amount: %.2lf\n", totalPrice);
     printf("------------\n");
 }

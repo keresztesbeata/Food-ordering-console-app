@@ -1,34 +1,32 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdbool.h>
 #include "input_from_customer.h"
 #include "display_menu.h"
 #include "display_order.h"
 #include "loading_data.h"
 // maximum memory
-#define MAX_USERNAME 30
-#define MAX_PASSWORD 30
-#define MAX_ADDITIONAL_INFO 20
+#define MAX_FOOD_NAME 30
+#define MAX_FOOD_TYPE_NAME 30
+#define MAX_DRINK_NAME 20
 #define LOAD_DATA "Please load the data"
-
-enum statesOfOrder {LOADING_DATA,LOGIN, FOOD, FOOD_TYPE, DRINK, CUTLERY, INFO, ORDER}; // states of the order
+enum statesOfOrder {LOADING_DATA, LOGIN, FOOD, FOOD_TYPE, DRINK, CUTLERY, INFO, ORDER}; // states of the order
 int main() {
     //food data
     int noFoods,*noFoodTypes,noDrinks;
     char **foods,***foodTypes,**drinks;
     double **foodPrices,*drinkPrices;
     //user input data
-    char username[MAX_USERNAME], password[MAX_PASSWORD], addInfo[MAX_ADDITIONAL_INFO];
+    char username[30], password[30], addInfo[100];
     int foodChoice, typeChoice, drinkChoice, getCutlery;
+    //loop
     int state=LOADING_DATA;
     bool confirm=false;
     while(!confirm) {
         switch(state) {
-            case LOADING_DATA: {
-                printf("%s\n", LOAD_DATA);
-                loadData(&noFoods, &foods, &noFoodTypes, &foodTypes, &foodPrices, &noDrinks, &drinks, &drinkPrices, &state);
+            case LOADING_DATA:{
+                loadData(&noFoods,&foods,&noFoodTypes,&foodTypes,&foodPrices,&noDrinks,&drinks,&drinkPrices,&state);
                 break;
-            }
+                }
             case LOGIN: {
                 login(username, password, &state);
                 break;
@@ -54,17 +52,16 @@ int main() {
                 break;
             }
             case INFO:{
-                getAdditionalInfo(addInfo, &state);
+              getAdditionalInfo(addInfo, &state);
                 break;
             }
             case ORDER:{
-                displayOrder(username, foodTypes[foodChoice][typeChoice], foodPrices[foodChoice][typeChoice], drinks[drinkChoice], drinkPrices[drinkChoice], drinkChoice, getCutlery, addInfo);
-                placeOrder(&confirm, username, &state);
+                    displayOrder(username, foodTypes[foodChoice][typeChoice], foodPrices[foodChoice][typeChoice], drinks[drinkChoice], drinkPrices[drinkChoice], drinkChoice, getCutlery, addInfo);
+                    placeOrder(&confirm, username, &state);
             }
             default:break;
         }
     }
-    //free memory
     freeMemory(noFoods,noFoodTypes,foods,foodTypes,foodPrices,noDrinks,drinks,drinkPrices);
     return 0;
 }

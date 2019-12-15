@@ -8,8 +8,6 @@
 #include <stdbool.h>
 #include<string.h>
 #include "display_order.h"
-#define MAX_NAME_LEGHT 200
-char nameCollection[MAX_NAME_LEGHT]="admin,";
 
 void displaySignOptions () {
     printf("Welcome to Food Thingies!\n");
@@ -18,26 +16,6 @@ void displaySignOptions () {
     printf("b) %s\n",SIGN_UP);
 }
 
-void signUp(char username[], char password[], int *state, int *goOn ) {
-    printf("%s\n",SIGNING_UP);
-    printf("---Username:\n>");
-    gets(username);
-    int conditionUsername=validateUsername(username);
-    if(!conditionUsername) {
-        printf("---Password:\n>");
-        gets(password);
-        int conditionPassword = validatePassword(password, username);
-        if(conditionPassword) {
-            (*state)++;*goOn=0;
-            strcat(username,",");
-            strcat(nameCollection,username);
-        }
-        else
-            incorrectNewPassword(password,username);
-    }
-    else
-        printf("%s\n",DUPLICATE_USER);
-}
 void signIn(char username[], char password[], int *state, int *goOn ) {
     printf("%s\n",SIGNING_IN);
     printf("---Username:\n>");
@@ -57,6 +35,25 @@ void signIn(char username[], char password[], int *state, int *goOn ) {
         printf("%s\n",USER_NOT_FOUND);
         *goOn=0;
     }
+}
+
+void signUp(char username[], char password[], int *state, int *goOn ) {
+    printf("%s\n",SIGNING_UP);
+    printf("---Username:\n>");
+    gets(username);
+    int conditionUsername=validateUsername(username);
+    if(!conditionUsername) {
+        printf("---Password:\n>");
+        gets(password);
+        int conditionPassword = validatePassword(password, username);
+        if(conditionPassword) {
+            (*state)++;*goOn=0;
+        }
+        else
+            incorrectNewPassword(password,username);
+    }
+    else
+        printf("%s\n",DUPLICATE_USER);
 }
 
 void login(char username[], char password[], int *state) {
@@ -80,15 +77,16 @@ void login(char username[], char password[], int *state) {
     }
 }
 int validateUsername(char username[]) {
-    char copyCollection[MAX_NAME_LEGHT];
-    strcpy(copyCollection,nameCollection);
-   char *ptr=strtok(copyCollection,",");
-   while(ptr) {
-       if(strcmp(username,ptr)==0) return 1;
-       ptr=strtok(NULL,",");
-   }
+    if(strcmp(username,"admin")==0)
+        return 1;
     return 0;
 }
+/*
+the password must be at least 7 chars long
+the password must not contain the username
+the password must contain one of the following characters: .,_,!
+the password must contain digits
+*/
 int validatePassword(char password[], char username[]) {
     if(isLongEnough(password) && notContainUsername(password,username) && containSpecialCharacters(password) && containDigits(password))
         return 1;
@@ -121,6 +119,7 @@ void incorrectNewPassword(char password[], char username[]) {
     if(!containSpecialCharacters(password)) printf("%s\n",ERROR_PASSWORD_SPECIAL_CHAR);
     if(!containDigits(password)) printf("%s\n",ERROR_PASSWORD_DIGITS);
 }
+
 
 int getChoiceIndex(int nrChoices, int *state) {
     int customerChoice;
@@ -185,6 +184,6 @@ void placeOrder(bool *confirm, char username[], int *state) {
         if (choice=='b')
             (*state)-=2;     //it brings us back to the cutlery option
         else
-            getchar();
+            getchar();  //reads new line
     }
 }

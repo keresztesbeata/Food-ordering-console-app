@@ -5,10 +5,6 @@
 #ifndef _ORDERING_FOOD_INPUT_FROM_CUSTOMER_H
 #define _ORDERING_FOOD_INPUT_FROM_CUSTOMER_H
 
-#endif //_ORDERING_FOOD_INPUT_FROM_CUSTOMER_H
-
-#include <stdbool.h>
-
 #define ERROR_PASSWORD_LONG "The password must be at least 7 chars long"
 #define ERROR_PASSWORD_NOT_USERNAME "The password must not contain the username"
 #define ERROR_PASSWORD_SPECIAL_CHAR "The password must contain one of the following characters: {'.','_','!'}"
@@ -21,7 +17,7 @@
 #define USER_NOT_FOUND "Username doesn't exist"
 #define DUPLICATE_USER "Please choose another username!"
 #define INCORRECT_PASSWORD "Incorrect password"
-
+#include <stdbool.h>
 
 //login
 void login(char username[], char password[], int *state);
@@ -42,4 +38,4 @@ int chooseCutlery(int *state);
 void getAdditionalInfo(char addInfo[], int *state);
 void placeOrder(bool *confirm, char username[], int *state);
 
-
+#endif //_ORDERING_FOOD_INPUT_FROM_CUSTOMER_H

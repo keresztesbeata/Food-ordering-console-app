@@ -5,10 +5,6 @@
 #ifndef _ORDERING_FOOD_INPUT_FROM_CUSTOMER_H
 #define _ORDERING_FOOD_INPUT_FROM_CUSTOMER_H
 
-#endif //_ORDERING_FOOD_INPUT_FROM_CUSTOMER_H
-
-#include <stdbool.h>
-
 #define ERROR_PASSWORD_LONG "The password must be at least 7 chars long"
 #define ERROR_PASSWORD_NOT_USERNAME "The password must not contain the username"
 #define ERROR_PASSWORD_SPECIAL_CHAR "The password must contain one of the following characters: {'.','_','!'}"
@@ -21,15 +17,20 @@
 #define USER_NOT_FOUND "Username doesn't exist"
 #define DUPLICATE_USER "Please choose another username!"
 #define INCORRECT_PASSWORD "Incorrect password"
-
+#define MAX_NAME_LENGHT 20
+#define MAX_PASSWD_LENGHT 20
+#include <stdbool.h>
+#include<stdio.h>
 
 //login
 void login(char username[], char password[], int *state);
-void signIn(char username[], char password[], int *state, int *goOn );
-void signUp(char username[], char password[], int *state, int *goOn );
+void signIn(FILE *loginFile, char username[], char password[], int *state, int *goOn );
+void signUp(FILE *loginFile, char username[], char password[], int *state, int *goOn );
 //validate username and password
-int validateUsername(char username[]);
-int validatePassword(char password[], char username[]);
+void decrypt_pass(int key, char password[]);
+void encrypt_pass(int key, char password[]);
+int validateUsername(FILE *loginFile, int noOfUsers, char username[], char matchingPassword[]);
+int validatePassword(char password[], char matchingPassword[], char username[]);
 int isLongEnough(char password[]);
 int notContainUsername(char password[],char username[]);
 int containSpecialCharacters(char password[]);
@@ -42,4 +43,4 @@ int chooseCutlery(int *state);
 void getAdditionalInfo(char addInfo[], int *state);
 void placeOrder(bool *confirm, char username[], int *state);
 
-
+#endif //_ORDERING_FOOD_INPUT_FROM_CUSTOMER_H
