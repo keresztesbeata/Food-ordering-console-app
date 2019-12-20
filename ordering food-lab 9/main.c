@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "input_from_customer.h"
-#include "display_menu.h"
 #include "display_order.h"
 #include "loading_data.h"
 #include "foods.h"
@@ -54,7 +53,6 @@ int main() {
                     break;
                 }
                 case CUTLERY: {
-                    displayCutlery();
                     cutleryChoice = chooseCutlery(&state);
                     break;
                 }

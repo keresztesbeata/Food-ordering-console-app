@@ -218,7 +218,16 @@ int getOptionalChoiceIndex(int nrChoices, int *state) {
     return chosenElement;
 }
 
+void displayCutlery() {
+    printf("Do you want cutlery?\n");
+    printf("a) Yes\n");
+    printf("b) No, thanks\n");
+    printf("c) Go back\n");
+    printf(">");
+}
+
 int chooseCutlery (int *state) {
+    displayCutlery();
     int wantCutlery;
     int choice=getchar();
     getchar();

@@ -42,6 +42,7 @@ int containSpecialCharacters(char password[]);
 int containDigits(char password[]);
 void incorrectNewPassword(customer *c);
 //user choices
+void displayCutlery();
 int getChoiceIndex(int nrChoices, int *state);
 int getOptionalChoiceIndex(int nrChoices, int *state);
 int chooseCutlery(int *state);
